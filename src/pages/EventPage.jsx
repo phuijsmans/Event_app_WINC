@@ -12,7 +12,6 @@ import {
 import { useLoaderData } from "react-router-dom";
 
 export const loader = async ({ params }) => {
-  console.log(params.eventId);
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
 
   return { event: await event.json() };
