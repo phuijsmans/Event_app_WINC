@@ -3,7 +3,7 @@ import { Heading } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 import { AddEventForm } from "../components/AddEventForm";
 import { SearchTitle } from "../components/SearchTitle";
-import { EventsContext } from "../components/Contexts";
+import { EventsContext, CategoryContext } from "../components/Contexts";
 import { EventCardBasic } from "../components/EventCardBasic";
 
 export const loader = async () => {
@@ -27,9 +27,11 @@ export const EventsPage = () => {
 
       <AddEventForm users={users} categories={categories} />
       <EventsContext.Provider value={events}>
-        <SearchTitle />
-        <EventCardBasic events={events} categories={categories} />
+        <CategoryContext.Provider value={categories}>
+          <SearchTitle />
+        </CategoryContext.Provider>
       </EventsContext.Provider>
+      {/* <EventCardBasic events={events} categories={categories} /> */}
     </>
   );
 };
