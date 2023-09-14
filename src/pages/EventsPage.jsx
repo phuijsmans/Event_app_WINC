@@ -4,7 +4,6 @@ import { useLoaderData } from "react-router-dom";
 import { AddEventForm } from "../components/AddEventForm";
 import { SearchTitle } from "../components/SearchTitle";
 import { EventsContext, CategoryContext } from "../components/Contexts";
-import { EventCardBasic } from "../components/EventCardBasic";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -31,7 +30,6 @@ export const EventsPage = () => {
           <SearchTitle />
         </CategoryContext.Provider>
       </EventsContext.Provider>
-      {/* <EventCardBasic events={events} categories={categories} /> */}
     </>
   );
 };

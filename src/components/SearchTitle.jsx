@@ -6,7 +6,7 @@ import { EventCardBasic } from "./EventCardBasic";
 export const SearchTitle = () => {
   const events = useContext(EventsContext);
   const categories = useContext(CategoryContext);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const handleChange = (event) => {
     setSearch(event.target.value);
   };
