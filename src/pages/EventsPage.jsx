@@ -2,9 +2,8 @@ import React from "react";
 import { Heading } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 import { AddEventForm } from "../components/AddEventForm";
-import { SearchTitle } from "../components/SearchTitle";
+import { SearchEvent } from "../components/SearchEvent";
 import { EventsContext, CategoryContext } from "../components/Contexts";
-
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -27,7 +26,7 @@ export const EventsPage = () => {
       <AddEventForm users={users} categories={categories} />
       <EventsContext.Provider value={events}>
         <CategoryContext.Provider value={categories}>
-          <SearchTitle />
+          <SearchEvent />
         </CategoryContext.Provider>
       </EventsContext.Provider>
     </>

@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { EventsContext, CategoryContext } from "./Contexts";
 import { EventCardBasic } from "./EventCardBasic";
 
-export const SearchTitle = () => {
+export const SearchEvent = () => {
   const events = useContext(EventsContext);
   const categories = useContext(CategoryContext);
   const [search, setSearch] = useState("");
