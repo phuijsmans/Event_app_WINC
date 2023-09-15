@@ -1,7 +1,7 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useState, useContext } from "react";
-import { EventsContext, CategoryContext } from "./Contexts";
-import { EventCardBasic } from "./EventCardBasic";
+import { EventsContext, CategoryContext } from "../Contexts";
+import { EventCardBasic } from "../EventCardBasic";
 
 export const SearchEvent = () => {
   const events = useContext(EventsContext);

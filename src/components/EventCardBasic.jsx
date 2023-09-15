@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { ShowDateAndTime } from "./ui/ShowDateAndTime";
+import { ShowDateAndTime } from "./showData/ShowDateAndTime";
 
 export const EventCardBasic = ({ events, categories }) => {
   return (
