@@ -10,10 +10,11 @@ import {
 } from "@chakra-ui/react";
 
 import { useLoaderData } from "react-router-dom";
+import { DeleteEvent } from "../components/eventsData/DeleteEvent";
+import { EditEvent } from "../components/eventsData/EditEvent";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
-
   return { event: await event.json() };
 };
 
@@ -30,7 +31,10 @@ export const EventPage = () => {
             <Text>{event.description}</Text>
           </CardBody>
         </CardBody>
-        <CardFooter></CardFooter>
+        <CardFooter>
+          <EditEvent event={event} />
+          <DeleteEvent event={event} />
+        </CardFooter>
       </Card>
     </>
   );
