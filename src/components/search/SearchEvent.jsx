@@ -1,13 +1,20 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useState, useContext } from "react";
-import { EventsContext, CategoryContext } from "../Contexts";
-import { EventCardBasic } from "../EventCardBasic";
+import {
+  EventsContext,
+  CategoryContext,
+  FilteredCategoriesContext,
+} from "../Contexts";
+import { EventCardsList } from "../EventCardsList";
+import { SearchFilterCategories } from "./SearchFilterCategories";
 
 export const SearchEvent = () => {
   const events = useContext(EventsContext);
   const categories = useContext(CategoryContext);
+  const filteredCategories = useContext(FilteredCategoriesContext);
   const [search, setSearch] = useState("");
-  const handleChange = (event) => {
+
+  const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
@@ -16,6 +23,7 @@ export const SearchEvent = () => {
       console.log("Empty");
     } else {
       console.log(text);
+      console.log(filteredCategories);
     }
   };
 
@@ -26,9 +34,16 @@ export const SearchEvent = () => {
 
   return (
     <>
-      <Input onChange={handleChange}></Input>
+      <Input type="text" onChange={handleSearch}></Input>
+      <SearchFilterCategories events={matchedEvents} />
       <Button onClick={() => test(matchedEvents)}>Test</Button>
-      <EventCardBasic events={matchedEvents} categories={categories} />
+      <FilteredCategoriesContext.Provider value={filteredCategories}>
+        <EventCardsList
+          events={matchedEvents}
+          categories={categories}
+          filteredCategories={filteredCategories}
+        />
+      </FilteredCategoriesContext.Provider>
     </>
   );
 };

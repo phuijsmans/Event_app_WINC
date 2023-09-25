@@ -1,7 +1,7 @@
 import React from "react";
 import { Heading } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
-import { AddEventForm } from "../components/AddEventForm";
+import { AddEventForm } from "../components/eventsData/AddEventForm";
 import { SearchEvent } from "../components/search/SearchEvent";
 import { EventsContext, CategoryContext } from "../components/Contexts";
 export const loader = async () => {

@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { EventPage, loader as postLoader } from "./pages/EventPage";
 import { EventsPage, loader as postListLoader } from "./pages/EventsPage";
-import { action as createEvent } from "./components/AddEventForm";
+import { action as createEvent } from "./components/eventsData/AddEventForm";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
 
