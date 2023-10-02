@@ -1,18 +1,32 @@
-import { Button } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { EventForm } from "../ui/forms/EventForm";
 
 export const EditEvent = ({ event }) => {
-  const ROOT_URL = "http://localhost:3000/";
-  const sendRequest = async (method, root_url, eventId) => {
-    const response = await fetch(`${root_url}events/${eventId}`, { method });
+  // const [formData, setFormData] = useState();
 
-    const result = await response.json();
+  // useEffect(() => {
+  //   let editedFormData = formData;
+  //   editedFormData.createdBy = Number(formData.createdBy);
+  //   const getCategoryIds = formData.categoryIds.split(",");
+  //   console.log(returnNumberArray(getCategoryIds));
+  //   editedFormData.categoryIds = returnNumberArray(getCategoryIds);
+  //   console.log(formData);
+  // });
 
-    return result;
-  };
+  // const test = (e) => {
+  //   console.log("update event!");
+  //   console.log(formData);
+  //   console.log(e);
+  // };
 
   return (
     <>
-      <Button>EDIT EVENT</Button>
+      <EventForm
+        textButton={"EDIT EVENT"}
+        event={event}
+        // setFormData={setFormData}
+        method={"PATCH"}
+      />
     </>
   );
 };
