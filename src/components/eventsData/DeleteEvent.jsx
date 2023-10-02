@@ -1,4 +1,11 @@
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  useDisclosure,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -14,19 +21,34 @@ export const DeleteEvent = ({ event }) => {
     isDeleted(true);
   };
   const [deleted, isDeleted] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       {deleted ? (
         <Navigate to="/" />
       ) : (
-        <Button
-          type="submit"
-          backgroundColor={"red.300"}
-          color={"black"}
-          onClick={() => deleteEvent(event)}
-        >
-          DELETE EVENT
-        </Button>
+        <>
+          <Modal isOpen={isOpen} onClose={onClose} size={"md"}>
+            <ModalOverlay />{" "}
+            <ModalContent p="2em">
+              <Text>Are you sure you want to delete event {event.title}?</Text>
+              <Button
+                onClick={() => deleteEvent(event)}
+                backgroundColor={"red.300"}
+              >
+                Delete it!
+              </Button>
+            </ModalContent>
+          </Modal>
+          <Button
+            type="submit"
+            backgroundColor={"red.300"}
+            color={"black"}
+            onClick={onOpen}
+          >
+            DELETE EVENT
+          </Button>
+        </>
       )}
     </>
   );
