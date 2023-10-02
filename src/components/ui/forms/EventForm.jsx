@@ -15,8 +15,9 @@ import {
   Checkbox,
   Stack,
   useToast,
+  CheckboxGroup,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { FormButton } from "../FormButton";
 import { CategoryContext, UsersContext } from "../../Contexts";
@@ -26,9 +27,7 @@ export const EventForm = ({ textButton, event, method }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
-  const [selectedCategories, setSelectedCategories] = useState(
-    event.categoryIds
-  );
+  const [selectedCategories, setSelectedCategories] = useState([]);
   // console.log(selectedCategories);
   const changeSelectedCategories = (isChecked, categoryId) => {
     if (isChecked) {
@@ -40,19 +39,39 @@ export const EventForm = ({ textButton, event, method }) => {
     }
   };
 
+  useEffect(() => {
+    if (selectedCategories.length === 0) {
+      setCheckSelectCategories(false);
+    } else {
+      setCheckSelectCategories(true);
+    }
+  });
+
   const toast = useToast();
+  const [checkSelectCategories, setCheckSelectCategories] = useState(false);
 
   const handleSubmit = (e) => {
-    const data = new FormData(e.target);
-    const formObject = Object.fromEntries(data.entries());
-    SendRequest({ method }, formObject);
-    toast({
-      title: `Event edited`,
-      description: `Event ${e.target.title.value} has succesfully been edited`,
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
+    if (checkSelectCategories) {
+      const data = new FormData(e.target);
+      const formObject = Object.fromEntries(data.entries());
+      SendRequest({ method }, formObject);
+      toast({
+        title: `Event succesfully edited`,
+        description: `Event ${e.target.title.value} has succesfully been edited`,
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      setSelectedCategories([]);
+    } else {
+      toast({
+        title: `Event failed to edit`,
+        description: `Fill all fields please`,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -76,6 +95,13 @@ export const EventForm = ({ textButton, event, method }) => {
               isReadOnly={true}
             ></Input>
             <Stack direction={"row"}>
+              {checkSelectCategories ? (
+                <></>
+              ) : (
+                <>
+                  <Text color={"red"}>requires a category!!!</Text>
+                </>
+              )}
               {selectedCategories && (
                 <>
                   {selectedCategories.map((categoryId) => {
@@ -93,22 +119,24 @@ export const EventForm = ({ textButton, event, method }) => {
                 <AccordionButton>Select categories</AccordionButton>
                 <AccordionPanel>
                   <Stack>
-                    {categories.map((category) => {
-                      return (
-                        <Checkbox
-                          key={category.id}
-                          onChange={(e) =>
-                            changeSelectedCategories(
-                              e.target.checked,
-                              category.id,
-                              selectedCategories
-                            )
-                          }
-                        >
-                          {category.name}
-                        </Checkbox>
-                      );
-                    })}
+                    <CheckboxGroup>
+                      {categories.map((category) => {
+                        return (
+                          <Checkbox
+                            key={category.id}
+                            onChange={(e) =>
+                              changeSelectedCategories(
+                                e.target.checked,
+                                category.id,
+                                selectedCategories
+                              )
+                            }
+                          >
+                            {category.name}
+                          </Checkbox>
+                        );
+                      })}
+                    </CheckboxGroup>
                   </Stack>
                 </AccordionPanel>
               </AccordionItem>

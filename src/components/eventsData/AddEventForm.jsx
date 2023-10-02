@@ -15,6 +15,7 @@ import {
   AccordionPanel,
   Checkbox,
   Stack,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form, redirect } from "react-router-dom";
@@ -75,11 +76,11 @@ export const AddEventForm = ({ users, categories }) => {
           <ModalHeader>Add event details</ModalHeader>
           <Form className="new-event" method="POST">
             <Text>Title:</Text>
-            <Input type="text" name="title" />
+            <Input type="text" name="title" isRequired={true} />
             <Text>ImageURL:</Text>
-            <Input type="text" name="image"></Input>
+            <Input type="text" name="image" isRequired={true}></Input>
             <Text>Description:</Text>
-            <Textarea name="description" />
+            <Textarea name="description" isRequired={true} />
             <Text>Selected categories:</Text>
             <Input
               type="hidden"
@@ -105,32 +106,34 @@ export const AddEventForm = ({ users, categories }) => {
                 <AccordionButton>Select categories</AccordionButton>
                 <AccordionPanel>
                   <Stack>
-                    {categories.map((category) => {
-                      return (
-                        <Checkbox
-                          key={category.id}
-                          onChange={(e) =>
-                            changeSelectedCategories(
-                              e.target.checked,
-                              category.id,
-                              selectedCategories
-                            )
-                          }
-                        >
-                          {category.name}
-                        </Checkbox>
-                      );
-                    })}
+                    <CheckboxGroup>
+                      {categories.map((category) => {
+                        return (
+                          <Checkbox
+                            key={category.id}
+                            onChange={(e) =>
+                              changeSelectedCategories(
+                                e.target.checked,
+                                category.id,
+                                selectedCategories
+                              )
+                            }
+                          >
+                            {category.name}
+                          </Checkbox>
+                        );
+                      })}
+                    </CheckboxGroup>
                   </Stack>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
             <Text>Location:</Text>
-            <Input type="text" name="location"></Input>
+            <Input type="text" name="location" isRequired={true}></Input>
             <Text>Start time:</Text>
-            <Input type="datetime-local" name="startTime" />
+            <Input type="datetime-local" name="startTime" isRequired={true} />
             <Text>End time:</Text>
-            <Input type="datetime-local" name="endTime" />
+            <Input type="datetime-local" name="endTime" isRequired={true} />
             <Text>User:</Text>
             <Select name="createdBy">
               {users.map((user) => {
