@@ -16,7 +16,6 @@ import {
   Checkbox,
   Stack,
   CheckboxGroup,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Form, redirect } from "react-router-dom";

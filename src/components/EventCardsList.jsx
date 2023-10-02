@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { ShowDateAndTime } from "./showData/ShowDateAndTime";
 
-export const EventCardsList = ({ events, categories, filteredCategories }) => {
+export const EventCardsList = ({ events, categories }) => {
   return (
     <Stack direction={["column", "row"]} spacing={"1em"} p={"1em"}>
       {events.map((event) => (
