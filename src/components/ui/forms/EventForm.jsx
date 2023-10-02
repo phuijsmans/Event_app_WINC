@@ -4,7 +4,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   Text,
   Input,
   Textarea,
@@ -15,14 +14,15 @@ import {
   AccordionPanel,
   Checkbox,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { FormButton } from "../FormButton";
 import { CategoryContext, UsersContext } from "../../Contexts";
 import { SendRequest } from "../../RequestData/SendRequest";
 
-export const EventForm = ({ textButton, event, setFormData, method }) => {
+export const EventForm = ({ textButton, event, method }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
@@ -40,13 +40,19 @@ export const EventForm = ({ textButton, event, setFormData, method }) => {
     }
   };
 
+  const toast = useToast();
+
   const handleSubmit = (e) => {
-    console.log("handleSubmit");
     const data = new FormData(e.target);
     const formObject = Object.fromEntries(data.entries());
-    //setFormData(formObject);
-    console.log({ method }, formObject);
     SendRequest({ method }, formObject);
+    toast({
+      title: `Event edited`,
+      description: `Event ${e.target.title.value} has succesfully been edited`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (
