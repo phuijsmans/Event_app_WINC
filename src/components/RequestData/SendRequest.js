@@ -1,15 +1,16 @@
-import { redirect } from "react-router-dom";
-
 export const SendRequest = (method, formData) => {
   const ROOT_URL = "http://localhost:3000/";
   const sendRequest = async (method, root_url, url_part = "", body = false) => {
     const options = {};
     options.method = method;
-    if (method !== "GET" && body) {
+    if ((method !== "GET" && body) || method !== "DELETE") {
       options.body = JSON.stringify(body);
       options.headers = {
         "Content-Type": "application/json",
       };
+    }
+    if (method === "DELETE") {
+      console.log("DELETE REQUEST");
     }
     const newId = await fetch(`${root_url}${url_part}`, options)
       .then((res) => res.json())

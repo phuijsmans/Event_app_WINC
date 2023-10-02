@@ -1,32 +1,33 @@
 import { Button } from "@chakra-ui/react";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
-// export const deleteEvent = async ({ request }) => {
-//   console.log("Delete event: ", request);
-// };
 const ROOT_URL = "http://localhost:3000/";
 const sendRequest = async (method, root_url, eventId) => {
-  const response = await fetch(`${root_url}events/${eventId}`, { method });
-
-  const result = await response.json();
-
-  return result;
+  await fetch(`${root_url}events/${eventId}`, { method });
 };
 
 export const DeleteEvent = ({ event }) => {
   const deleteEvent = (event) => {
     console.log("Delete eventID: ", event.id);
     sendRequest("DELETE", ROOT_URL, event.id);
+    isDeleted(true);
   };
+  const [deleted, isDeleted] = useState(false);
   return (
     <>
-      <Button
-        type="submit"
-        backgroundColor={"red.300"}
-        color={"black"}
-        onClick={() => deleteEvent(event)}
-      >
-        DELETE EVENT
-      </Button>
+      {deleted ? (
+        <Navigate to="/" />
+      ) : (
+        <Button
+          type="submit"
+          backgroundColor={"red.300"}
+          color={"black"}
+          onClick={() => deleteEvent(event)}
+        >
+          DELETE EVENT
+        </Button>
+      )}
     </>
   );
 };
