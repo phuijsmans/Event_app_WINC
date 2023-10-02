@@ -66,15 +66,16 @@
       "endTime": "2023-10-07T16:42"
     },
     {
-      "title": "asdasda",
+      "title": "asdasdaasdsdf",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "description": "earew",
+      "description": "asdasda",
       "categoryIds": [
-        2
+        2,
+        1
       ],
-      "location": "asadda",
-      "startTime": "2023-10-12T15:11",
-      "endTime": "2023-10-27T15:11",
+      "location": "asdsadad",
+      "startTime": "2023-10-16T17:29",
+      "endTime": "2023-10-26T17:29",
       "createdBy": 1,
       "id": 5
     }

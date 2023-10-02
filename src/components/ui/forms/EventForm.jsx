@@ -99,7 +99,7 @@ export const EventForm = ({ textButton, event, method }) => {
                 <></>
               ) : (
                 <>
-                  <Text color={"red"}>requires a category!!!</Text>
+                  <Text color={"red"}>requires at least 1 category!!!</Text>
                 </>
               )}
               {selectedCategories && (

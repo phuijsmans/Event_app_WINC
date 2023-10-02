@@ -16,8 +16,9 @@ import {
   Checkbox,
   Stack,
   CheckboxGroup,
+  useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, redirect } from "react-router-dom";
 
 export const action = async ({ request }) => {
@@ -26,6 +27,11 @@ export const action = async ({ request }) => {
   transformFormData.createdBy = Number(formData.createdBy);
   const getCategoryIds = formData.categoryIds.split(",");
   transformFormData.categoryIds = returnNumberArray(getCategoryIds);
+  console.log(transformFormData.categoryIds.length);
+  if (transformFormData.categoryIds.length <= 1) {
+    //this means there is no category selected
+    return redirect(`/`);
+  }
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
     body: JSON.stringify(transformFormData),
@@ -45,6 +51,7 @@ const returnNumberArray = (array) => {
 };
 
 export const AddEventForm = ({ users, categories }) => {
+  const [checkSelectCategories, setCheckSelectCategories] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -59,12 +66,13 @@ export const AddEventForm = ({ users, categories }) => {
     }
   };
 
-  const testButton = (chosenCategories, categories) => {
-    console.log(chosenCategories);
-    chosenCategories.forEach((categoryId) => {
-      console.log(categories[categoryId - 1]);
-    });
-  };
+  useEffect(() => {
+    if (selectedCategories.length === 0) {
+      setCheckSelectCategories(false);
+    } else {
+      setCheckSelectCategories(true);
+    }
+  });
 
   return (
     <>
@@ -89,6 +97,13 @@ export const AddEventForm = ({ users, categories }) => {
               isReadOnly={true}
             ></Input>
             <Stack direction={"row"}>
+              {checkSelectCategories ? (
+                <></>
+              ) : (
+                <>
+                  <Text color={"red"}>requires at least 1 category!!!</Text>
+                </>
+              )}
               {selectedCategories && (
                 <>
                   {selectedCategories.map((categoryId) => {
@@ -146,12 +161,6 @@ export const AddEventForm = ({ users, categories }) => {
             </Select>
             <Button type="submit">Post event!</Button>
           </Form>
-          <Button
-            type="button"
-            onClick={() => testButton(selectedCategories, categories)}
-          >
-            Test
-          </Button>
         </ModalContent>
       </Modal>
     </>
