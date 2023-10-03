@@ -7,13 +7,21 @@ import {
   Stack,
   Tag,
   Text,
+  Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ShowDateAndTime } from "./showData/ShowDateAndTime";
 
 export const EventCardsList = ({ events, categories }) => {
   return (
-    <Stack direction={["column", "row"]} spacing={"1em"} p={"1em"}>
+    <Flex
+      gap={"2em"}
+      flexWrap="wrap"
+      flexDir={"row"}
+      justify="center"
+      alignItems="center"
+      p={"2em"}
+    >
       {events.map((event) => (
         <Link key={event.id} to={`/event/${event.id}`}>
           <Card key={event.id} w={300} bg={"blue.200"}>
@@ -34,6 +42,6 @@ export const EventCardsList = ({ events, categories }) => {
           </Card>
         </Link>
       ))}
-    </Stack>
+    </Flex>
   );
 };
