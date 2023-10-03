@@ -9,6 +9,7 @@ import {
   Text,
   Flex,
   Stack,
+  Box,
 } from "@chakra-ui/react";
 
 import { useLoaderData } from "react-router-dom";
@@ -33,35 +34,39 @@ export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   return (
     <>
-      <Card bg={"blue.300"}>
-        <Image src={event.image} h={"10em"} alt="Image of event" />
-        <CardBody>
-          <Stack align={"center"}>
-            <CardHeader fontSize={"2em"}>{event.title}</CardHeader>
+      <Flex flexWrap="wrap" flexDir={"row"} justify="center">
+        <Card bg={"blue.300"} w="2xl">
+          <Image src={event.image} h={"10em"} alt="Image of event" />
+          <CardBody>
+            <Stack align={"center"}>
+              <CardHeader fontSize={"2em"}>{event.title}</CardHeader>
 
-            <Text>{event.description}</Text>
-            <ShowCategoriesLabels
-              categoryIds={event.categoryIds}
-              categories={categories}
-            />
-            <Text>Start of event: </Text>
-            <ShowDateAndTime date={event.startTime}></ShowDateAndTime>
-            <Text>End of event:</Text>
-            <ShowDateAndTime date={event.endTime}></ShowDateAndTime>
-            <Text>Organized by {users[event.createdBy - 1].name}</Text>
-          </Stack>
-        </CardBody>
-        <CardFooter>
-          <Stack gap="1em">
-            <CategoryContext.Provider value={categories}>
-              <UsersContext.Provider value={users}>
-                <EditEvent event={event} />
-              </UsersContext.Provider>
-            </CategoryContext.Provider>
-            <DeleteEvent event={event} />
-          </Stack>
-        </CardFooter>
-      </Card>
+              <Text>{event.description}</Text>
+              <Flex gap="1em" wrap="wrap" justify={"center"}>
+                <ShowCategoriesLabels
+                  categoryIds={event.categoryIds}
+                  categories={categories}
+                />
+              </Flex>
+              <Text>Start of event: </Text>
+              <ShowDateAndTime date={event.startTime}></ShowDateAndTime>
+              <Text>End of event:</Text>
+              <ShowDateAndTime date={event.endTime}></ShowDateAndTime>
+              <Text>Organized by {users[event.createdBy - 1].name}</Text>
+            </Stack>
+          </CardBody>
+          <CardFooter justify="center">
+            <Stack gap="1em" direction="row">
+              <CategoryContext.Provider value={categories}>
+                <UsersContext.Provider value={users}>
+                  <EditEvent event={event} />
+                </UsersContext.Provider>
+              </CategoryContext.Provider>
+              <DeleteEvent event={event} />
+            </Stack>
+          </CardFooter>
+        </Card>
+      </Flex>
     </>
   );
 };
