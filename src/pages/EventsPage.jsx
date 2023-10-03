@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Stack } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 import { AddEventForm } from "../components/eventsData/AddEventForm";
 import { SearchEvent } from "../components/search/SearchEvent";
@@ -21,14 +21,15 @@ export const EventsPage = () => {
 
   return (
     <>
-      <Heading>List of events</Heading>
-
-      <AddEventForm users={users} categories={categories} />
-      <EventsContext.Provider value={events}>
-        <CategoryContext.Provider value={categories}>
-          <SearchEvent />
-        </CategoryContext.Provider>
-      </EventsContext.Provider>
+      <Stack align="center">
+        <Heading>List of events</Heading>
+        <AddEventForm users={users} categories={categories} />
+        <EventsContext.Provider value={events}>
+          <CategoryContext.Provider value={categories}>
+            <SearchEvent />
+          </CategoryContext.Provider>
+        </EventsContext.Provider>
+      </Stack>
     </>
   );
 };

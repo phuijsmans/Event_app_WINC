@@ -1,4 +1,4 @@
-import { Input, Text } from "@chakra-ui/react";
+import { Input, Text, Stack, Flex } from "@chakra-ui/react";
 import { useState, useContext } from "react";
 import { EventsContext } from "../Contexts";
 import { SearchFilterCategories } from "./SearchFilterCategories";
@@ -19,8 +19,14 @@ export const SearchEvent = () => {
 
   return (
     <>
-      <Text>Search Event</Text>
-      <Input type="text" onChange={handleSearch}></Input>
+      <Stack align={"center"} w="30ch">
+        <Text>Search Event</Text>
+        <Input
+          id="SearchEventTitle"
+          type="text"
+          onChange={handleSearch}
+        ></Input>
+      </Stack>
       <SearchFilterCategories events={matchedEvents} />
     </>
   );

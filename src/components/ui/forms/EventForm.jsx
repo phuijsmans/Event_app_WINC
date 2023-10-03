@@ -80,7 +80,11 @@ export const EventForm = ({ textButton, event, method }) => {
       <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
         <ModalOverlay />
         <ModalContent p={"2em"}>
-          <Form className="new-event" onSubmit={handleSubmit}>
+          <Form
+            id="EditEventForm"
+            className="new-event"
+            onSubmit={handleSubmit}
+          >
             <Text>Title:</Text>
             <Input type="text" name="title" defaultValue={event.title} />
             <Text>ImageURL:</Text>

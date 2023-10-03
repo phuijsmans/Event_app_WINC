@@ -64,28 +64,30 @@ export const SearchFilterCategories = ({ events }) => {
 
   return (
     <>
-      <Text>Search Category</Text>
-      <Accordion allowToggle>
-        <AccordionItem>
-          <AccordionButton>Categories</AccordionButton>
-          <AccordionPanel>
-            <Stack direction={"column"}>
-              <CheckboxGroup>
-                {categories.map((category) => (
-                  <Checkbox
-                    key={category.id}
-                    onChange={(e) =>
-                      handleCheckbox(e.target.checked, category.id)
-                    }
-                  >
-                    {category.name}
-                  </Checkbox>
-                ))}
-              </CheckboxGroup>
-            </Stack>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+      <Stack align={"center"}>
+        <Text>Search Category</Text>
+        <Accordion allowToggle>
+          <AccordionItem>
+            <AccordionButton>Categories</AccordionButton>
+            <AccordionPanel>
+              <Stack direction={"column"}>
+                <CheckboxGroup>
+                  {categories.map((category) => (
+                    <Checkbox
+                      key={category.id}
+                      onChange={(e) =>
+                        handleCheckbox(e.target.checked, category.id)
+                      }
+                    >
+                      {category.name}
+                    </Checkbox>
+                  ))}
+                </CheckboxGroup>
+              </Stack>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Stack>
       <EventCardsList events={matchedCategory} categories={categories} />
     </>
   );

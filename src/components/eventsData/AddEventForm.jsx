@@ -74,13 +74,15 @@ export const AddEventForm = ({ users, categories }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Add event</Button>
+      <Button id="add-event-form-btn" onClick={onOpen}>
+        Add event
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
         <ModalOverlay />
         <ModalContent p={"2em"}>
           <ModalHeader>Add event details</ModalHeader>
-          <Form className="new-event" method="POST">
+          <Form id="AddEventForm" className="new-event" method="POST">
             <Text>Title:</Text>
             <Input type="text" name="title" isRequired={true} />
             <Text>ImageURL:</Text>
