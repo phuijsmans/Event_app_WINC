@@ -7,7 +7,9 @@ export const ShowDateAndTime = ({ date }) => {
 
     return (
       <Flex gap="1em">
-        <Text>D: {getDate}</Text>
+        <Text>
+          D: {getDate.slice(8, 10)}-{getDate.slice(5, 7)}-{getDate.slice(0, 4)}
+        </Text>
         <Text>T: {getTime}</Text>
       </Flex>
     );
