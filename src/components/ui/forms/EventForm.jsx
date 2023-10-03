@@ -16,6 +16,7 @@ import {
   Stack,
   useToast,
   CheckboxGroup,
+  Box,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
@@ -85,102 +86,126 @@ export const EventForm = ({ textButton, event, method }) => {
             className="new-event"
             onSubmit={handleSubmit}
           >
-            <Text>Title:</Text>
-            <Input type="text" name="title" defaultValue={event.title} />
-            <Text>ImageURL:</Text>
-            <Input type="text" name="image" defaultValue={event.image}></Input>
-            <Text>Description:</Text>
-            <Textarea name="description" defaultValue={event.description} />
-            <Text>Selected categories:</Text>
-            <Input
-              type="hidden"
-              name="categoryIds"
-              defaultValue={selectedCategories}
-              isReadOnly={true}
-            ></Input>
-            <Stack direction={"row"}>
-              {checkSelectCategories ? (
-                <></>
-              ) : (
-                <>
-                  <Text color={"red"}>requires at least 1 category!!!</Text>
-                </>
-              )}
-              {selectedCategories && (
-                <>
-                  {selectedCategories.map((categoryId) => {
-                    return (
-                      <Text key={categoryId}>
-                        {categories[categoryId - 1].name}
-                      </Text>
-                    );
-                  })}
-                </>
-              )}
-            </Stack>
-            <Accordion allowToggle>
-              <AccordionItem>
-                <AccordionButton>Select categories</AccordionButton>
-                <AccordionPanel>
-                  <Stack>
-                    <CheckboxGroup>
-                      {categories.map((category) => {
+            <Stack direction={"column"} gap="1em">
+              <Box>
+                <Text>Title:</Text>
+                <Input type="text" name="title" defaultValue={event.title} />
+              </Box>
+              <Box>
+                <Text>ImageURL:</Text>
+                <Input
+                  type="text"
+                  name="image"
+                  defaultValue={event.image}
+                ></Input>
+              </Box>
+              <Box>
+                <Text>Description:</Text>
+                <Textarea name="description" defaultValue={event.description} />
+              </Box>
+              <Box>
+                <Text>Selected categories:</Text>
+                <Input
+                  type="hidden"
+                  name="categoryIds"
+                  defaultValue={selectedCategories}
+                  isReadOnly={true}
+                ></Input>
+              </Box>
+              <Box>
+                <Stack direction={"row"}>
+                  {checkSelectCategories ? (
+                    <></>
+                  ) : (
+                    <>
+                      <Text color={"red"}>requires at least 1 category!!!</Text>
+                    </>
+                  )}
+                  {selectedCategories && (
+                    <>
+                      {selectedCategories.map((categoryId) => {
                         return (
-                          <Checkbox
-                            key={category.id}
-                            onChange={(e) =>
-                              changeSelectedCategories(
-                                e.target.checked,
-                                category.id,
-                                selectedCategories
-                              )
-                            }
-                          >
-                            {category.name}
-                          </Checkbox>
+                          <Text key={categoryId}>
+                            {categories[categoryId - 1].name}
+                          </Text>
                         );
                       })}
-                    </CheckboxGroup>
-                  </Stack>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-            <Text>Location:</Text>
-            <Input
-              type="text"
-              name="location"
-              defaultValue={event.location}
-            ></Input>
-            <Text>Start time:</Text>
-            <Input
-              type="datetime-local"
-              name="startTime"
-              defaultValue={event.startTime}
-            />
-            <Text>End time:</Text>
-            <Input
-              type="datetime-local"
-              name="endTime"
-              defaultValue={event.endTime}
-            />
-            <Text>User:</Text>
-            <Select name="createdBy">
-              {users.map((user) => {
-                return (
-                  <option key={user.id} type="number" value={user.id}>
-                    {user.name}
-                  </option>
-                );
-              })}
-            </Select>
-            <Input
-              hidden={true}
-              isReadOnly={true}
-              value={event.id}
-              type="number"
-              name="id"
-            />
-            <Button type="submit">{textButton}</Button>
+                    </>
+                  )}
+                </Stack>
+                <Accordion allowToggle>
+                  <AccordionItem>
+                    <AccordionButton>Select categories</AccordionButton>
+                    <AccordionPanel>
+                      <Stack>
+                        <CheckboxGroup>
+                          {categories.map((category) => {
+                            return (
+                              <Checkbox
+                                key={category.id}
+                                onChange={(e) =>
+                                  changeSelectedCategories(
+                                    e.target.checked,
+                                    category.id,
+                                    selectedCategories
+                                  )
+                                }
+                              >
+                                {category.name}
+                              </Checkbox>
+                            );
+                          })}
+                        </CheckboxGroup>
+                      </Stack>
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </Box>
+              <Box>
+                <Text>Location:</Text>
+                <Input
+                  type="text"
+                  name="location"
+                  defaultValue={event.location}
+                ></Input>
+              </Box>
+              <Box>
+                <Text>Start time:</Text>
+                <Input
+                  type="datetime-local"
+                  name="startTime"
+                  defaultValue={event.startTime}
+                />
+              </Box>
+              <Box>
+                <Text>End time:</Text>
+                <Input
+                  type="datetime-local"
+                  name="endTime"
+                  defaultValue={event.endTime}
+                />
+              </Box>
+              <Box>
+                <Text>User:</Text>
+                <Select name="createdBy">
+                  {users.map((user) => {
+                    return (
+                      <option key={user.id} type="number" value={user.id}>
+                        {user.name}
+                      </option>
+                    );
+                  })}
+                </Select>
+                <Input
+                  hidden={true}
+                  isReadOnly={true}
+                  value={event.id}
+                  type="number"
+                  name="id"
+                />
+              </Box>
+              <Button type="submit">{textButton}</Button>
+            </Stack>
           </Form>
         </ModalContent>
       </Modal>

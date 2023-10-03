@@ -16,6 +16,7 @@ import {
   Checkbox,
   Stack,
   CheckboxGroup,
+  Box,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Form, redirect } from "react-router-dom";
@@ -74,7 +75,7 @@ export const AddEventForm = ({ users, categories }) => {
 
   return (
     <>
-      <Button id="add-event-form-btn" onClick={onOpen}>
+      <Button id="add-event-form-btn" onClick={onOpen} bg={"blue.200"}>
         Add event
       </Button>
 
@@ -83,83 +84,105 @@ export const AddEventForm = ({ users, categories }) => {
         <ModalContent p={"2em"}>
           <ModalHeader>Add event details</ModalHeader>
           <Form id="AddEventForm" className="new-event" method="POST">
-            <Text>Title:</Text>
-            <Input type="text" name="title" isRequired={true} />
-            <Text>ImageURL:</Text>
-            <Input type="text" name="image" isRequired={true}></Input>
-            <Text>Description:</Text>
-            <Textarea name="description" isRequired={true} />
-            <Text>Selected categories:</Text>
-            <Input
-              type="hidden"
-              name="categoryIds"
-              value={selectedCategories}
-              isReadOnly={true}
-            ></Input>
-            <Stack direction={"row"}>
-              {checkSelectCategories ? (
-                <></>
-              ) : (
-                <>
-                  <Text color={"red"}>requires at least 1 category!!!</Text>
-                </>
-              )}
-              {selectedCategories && (
-                <>
-                  {selectedCategories.map((categoryId) => {
-                    return (
-                      <Text key={categoryId}>
-                        {categories[categoryId - 1].name}
-                      </Text>
-                    );
-                  })}
-                </>
-              )}
-            </Stack>
-            <Accordion allowToggle>
-              <AccordionItem>
-                <AccordionButton>Select categories</AccordionButton>
-                <AccordionPanel>
-                  <Stack>
-                    <CheckboxGroup>
-                      {categories.map((category) => {
+            <Stack direction={"column"} gap=".5em">
+              <Box>
+                <Text>Title:</Text>
+                <Input type="text" name="title" isRequired={true} />
+              </Box>
+              <Box>
+                <Text>ImageURL:</Text>
+                <Input type="text" name="image" isRequired={true}></Input>
+              </Box>
+              <Box>
+                <Text>Description:</Text>
+                <Textarea name="description" isRequired={true} />
+              </Box>
+              <Box>
+                <Text>Selected categories:</Text>
+                <Input
+                  type="hidden"
+                  name="categoryIds"
+                  value={selectedCategories}
+                  isReadOnly={true}
+                ></Input>
+                <Stack direction={"row"}>
+                  {checkSelectCategories ? (
+                    <></>
+                  ) : (
+                    <>
+                      <Text color={"red"}>requires at least 1 category!!!</Text>
+                    </>
+                  )}
+                  {selectedCategories && (
+                    <>
+                      {selectedCategories.map((categoryId) => {
                         return (
-                          <Checkbox
-                            key={category.id}
-                            onChange={(e) =>
-                              changeSelectedCategories(
-                                e.target.checked,
-                                category.id,
-                                selectedCategories
-                              )
-                            }
-                          >
-                            {category.name}
-                          </Checkbox>
+                          <Text key={categoryId}>
+                            {categories[categoryId - 1].name}
+                          </Text>
                         );
                       })}
-                    </CheckboxGroup>
-                  </Stack>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-            <Text>Location:</Text>
-            <Input type="text" name="location" isRequired={true}></Input>
-            <Text>Start time:</Text>
-            <Input type="datetime-local" name="startTime" isRequired={true} />
-            <Text>End time:</Text>
-            <Input type="datetime-local" name="endTime" isRequired={true} />
-            <Text>User:</Text>
-            <Select name="createdBy">
-              {users.map((user) => {
-                return (
-                  <option key={user.id} type="number" value={user.id}>
-                    {user.name}
-                  </option>
-                );
-              })}
-            </Select>
-            <Button type="submit">Post event!</Button>
+                    </>
+                  )}
+                </Stack>
+                <Accordion allowToggle>
+                  <AccordionItem>
+                    <AccordionButton>Select categories</AccordionButton>
+                    <AccordionPanel>
+                      <Stack>
+                        <CheckboxGroup>
+                          {categories.map((category) => {
+                            return (
+                              <Checkbox
+                                key={category.id}
+                                onChange={(e) =>
+                                  changeSelectedCategories(
+                                    e.target.checked,
+                                    category.id,
+                                    selectedCategories
+                                  )
+                                }
+                              >
+                                {category.name}
+                              </Checkbox>
+                            );
+                          })}
+                        </CheckboxGroup>
+                      </Stack>
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </Box>
+              <Box>
+                <Text>Location:</Text>
+                <Input type="text" name="location" isRequired={true}></Input>
+              </Box>
+              <Box>
+                <Text>Start time:</Text>
+                <Input
+                  type="datetime-local"
+                  name="startTime"
+                  isRequired={true}
+                />
+              </Box>
+              <Box>
+                <Text>End time:</Text>
+                <Input type="datetime-local" name="endTime" isRequired={true} />
+              </Box>
+              <Box>
+                <Text>User:</Text>
+                <Select name="createdBy">
+                  {users.map((user) => {
+                    return (
+                      <option key={user.id} type="number" value={user.id}>
+                        {user.name}
+                      </option>
+                    );
+                  })}
+                </Select>
+              </Box>
+              <Button type="submit">Post event!</Button>
+            </Stack>
           </Form>
         </ModalContent>
       </Modal>
