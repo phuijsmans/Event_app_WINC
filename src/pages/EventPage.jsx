@@ -7,6 +7,8 @@ import {
   Heading,
   Image,
   Text,
+  Flex,
+  Stack,
 } from "@chakra-ui/react";
 
 import { useLoaderData } from "react-router-dom";
@@ -31,29 +33,33 @@ export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   return (
     <>
-      <Heading>Event</Heading>
-      <Card bg={"blue.200"}>
-        <Image src={event.image} h={"10em"} />
+      <Card bg={"blue.300"}>
+        <Image src={event.image} h={"10em"} alt="Image of event" />
         <CardBody>
-          <CardHeader>{event.title}</CardHeader>
-          <CardBody>
+          <Stack align={"center"}>
+            <CardHeader fontSize={"2em"}>{event.title}</CardHeader>
+
             <Text>{event.description}</Text>
             <ShowCategoriesLabels
               categoryIds={event.categoryIds}
               categories={categories}
             />
+            <Text>Start of event: </Text>
             <ShowDateAndTime date={event.startTime}></ShowDateAndTime>
+            <Text>End of event:</Text>
             <ShowDateAndTime date={event.endTime}></ShowDateAndTime>
             <Text>Organized by {users[event.createdBy - 1].name}</Text>
-          </CardBody>
+          </Stack>
         </CardBody>
         <CardFooter>
-          <CategoryContext.Provider value={categories}>
-            <UsersContext.Provider value={users}>
-              <EditEvent event={event} />
-            </UsersContext.Provider>
-          </CategoryContext.Provider>
-          <DeleteEvent event={event} />
+          <Stack gap="1em">
+            <CategoryContext.Provider value={categories}>
+              <UsersContext.Provider value={users}>
+                <EditEvent event={event} />
+              </UsersContext.Provider>
+            </CategoryContext.Provider>
+            <DeleteEvent event={event} />
+          </Stack>
         </CardFooter>
       </Card>
     </>

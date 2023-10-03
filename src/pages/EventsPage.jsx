@@ -21,7 +21,7 @@ export const EventsPage = () => {
 
   return (
     <>
-      <Stack align="center">
+      <Stack align="center" bg={"blue.100"}>
         <Heading>List of events</Heading>
         <AddEventForm users={users} categories={categories} />
         <EventsContext.Provider value={events}>

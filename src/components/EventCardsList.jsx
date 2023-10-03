@@ -23,7 +23,7 @@ export const EventCardsList = ({ events, categories }) => {
     >
       {events.map((event) => (
         <Link key={event.id} to={`/event/${event.id}`}>
-          <Card key={event.id} w={300} bg={"blue.200"}>
+          <Card key={event.id} w={300} bg={"blue.300"}>
             <CardHeader>{event.title}</CardHeader>
             <CardBody>
               {event.description}

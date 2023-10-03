@@ -1,4 +1,4 @@
-import { Input, Text, Stack, Flex } from "@chakra-ui/react";
+import { Input, Text, Stack } from "@chakra-ui/react";
 import { useState, useContext } from "react";
 import { EventsContext } from "../Contexts";
 import { SearchFilterCategories } from "./SearchFilterCategories";
