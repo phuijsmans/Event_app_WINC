@@ -3,12 +3,10 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Button,
   Checkbox,
   CheckboxGroup,
   Stack,
   Text,
-  filter,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { CategoryContext } from "../Contexts";
@@ -17,53 +15,43 @@ import { EventCardsList } from "../EventCardsList";
 export const SearchFilterCategories = ({ events }) => {
   const categories = useContext(CategoryContext);
   const [filterCategory, setFilterCategory] = useState([]);
-  const [filterEvents, setFilterEvents] = useState([]);
 
-  const test = () => {
-    console.log("filter these categories: ");
-    console.log(filterCategory);
-
-    if (filterCategory.length === 0) {
-      setFilterEvents(events);
-    } else {
-      setFilterEvents([]);
-      events.forEach((event) => {
-        filterCategory.forEach((category) => {
-          if (
-            JSON.stringify(event.categoryIds).includes(JSON.stringify(category))
-          ) {
-            console.log(event.title);
-            setFilterEvents([...filterEvents, event]);
-          }
-        });
-        // if (
-        //   JSON.stringify(event.categoryIds) === JSON.stringify(filterCategory)
-        // ) {
-        //   console.log(event.title);
-        //   setFilterEvents(event);
-        // }
-      });
-      // setFilterEvents();
-      // events.filter((event) => {
-      //   JSON.stringify(event.categoryIds).includes(
-      //     JSON.stringify(filterCategory)
-      //   );
-      // })
+  const validateOneCategory = (object, filterCategory) => {
+    for (const category of object.categoryIds) {
+      if (category === filterCategory[0]) {
+        return true;
+      }
     }
-    console.log(filterEvents);
+    return false;
+  };
 
-    // const result = events.filter((event) =>
-    //   event.categoryIds.includes(filterCategory)
-    // );
+  const validateMultipleCategories = (object, filterCategories) => {
+    let amountCorrect = 0;
+    for (const category of object.categoryIds) {
+      for (const filterCategory of filterCategories) {
+        if (category === filterCategory) {
+          amountCorrect++;
+          break;
+        }
+      }
+    }
+    return amountCorrect === filterCategories.length;
   };
 
   const matchedCategory = events.filter((object) => {
     if (filterCategory.length === 0) {
       return object;
     }
-    return JSON.stringify(object.categoryIds.sort()).includes(
-      JSON.stringify(filterCategory.sort())
-    );
+    if (filterCategory.length === 1) {
+      if (validateOneCategory(object, filterCategory)) {
+        return object;
+      }
+    }
+    if (filterCategory.length > 1) {
+      if (validateMultipleCategories(object, filterCategory)) {
+        return object;
+      }
+    }
   });
 
   const handleCheckbox = (isChecked, categoryId) => {
@@ -95,7 +83,6 @@ export const SearchFilterCategories = ({ events }) => {
                 ))}
               </CheckboxGroup>
             </Stack>
-            <Button onClick={test}>Test</Button>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
