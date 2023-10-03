@@ -7,9 +7,12 @@ import {
   Tag,
   Text,
   Flex,
+  Stack,
+  Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ShowDateAndTime } from "./showData/ShowDateAndTime";
+import { ShowCategoriesLabels } from "./showData/ShowCategoriesLabels";
 
 export const EventCardsList = ({ events, categories }) => {
   return (
@@ -24,19 +27,26 @@ export const EventCardsList = ({ events, categories }) => {
       {events.map((event) => (
         <Link key={event.id} to={`/event/${event.id}`}>
           <Card key={event.id} w={300} bg={"blue.300"}>
-            <CardHeader>{event.title}</CardHeader>
-            <CardBody>
-              {event.description}
-              <Image src={event.image} w={200} h={125} />
-              {event.categoryIds.map((id) => (
-                <Tag key={id}>{categories[id - 1].name}</Tag>
-              ))}
+            <Image src={event.image} w={"100%"} h={125} />
+            <CardBody align={"center"}>
+              <Stack>
+                <CardHeader>{event.title}</CardHeader>
+                <Text>{event.description}</Text>
+                <Flex gap={"1em"} justify={"center"}>
+                  <ShowCategoriesLabels
+                    categoryIds={event.categoryIds}
+                    categories={categories}
+                  />
+                </Flex>
+              </Stack>
             </CardBody>
-            <CardFooter>
-              <Text>
-                Start: <ShowDateAndTime date={event.startTime} /> - End:
+            <CardFooter justify={"center"}>
+              <Stack align="center" direction="column">
+                <Text>Start: </Text>
+                <ShowDateAndTime date={event.startTime} />
+                <Text>End:</Text>
                 <ShowDateAndTime date={event.endTime} />
-              </Text>
+              </Stack>
             </CardFooter>
           </Card>
         </Link>
