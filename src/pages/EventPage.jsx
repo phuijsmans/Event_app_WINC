@@ -13,6 +13,7 @@ import { useLoaderData } from "react-router-dom";
 import { DeleteEvent } from "../components/eventsData/DeleteEvent";
 import { EditEvent } from "../components/eventsData/EditEvent";
 import { CategoryContext, UsersContext } from "../components/Contexts";
+import { ShowCategoriesLabels } from "../components/showData/ShowCategoriesLabels";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -36,6 +37,10 @@ export const EventPage = () => {
           <CardBody>
             <Image src={event.image} h={"10em"} />
             <Text>{event.description}</Text>
+            <ShowCategoriesLabels
+              categoryIds={event.categoryIds}
+              categories={categories}
+            />
           </CardBody>
         </CardBody>
         <CardFooter>
