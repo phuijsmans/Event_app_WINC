@@ -55,7 +55,6 @@ export const AddEventForm = ({ users, categories }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const changeSelectedCategories = (isChecked, categoryId) => {
-    //console.log(isChecked);
     if (isChecked) {
       setSelectedCategories([...selectedCategories, categoryId]);
     } else {
