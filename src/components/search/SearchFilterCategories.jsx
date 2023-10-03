@@ -68,7 +68,13 @@ export const SearchFilterCategories = ({ events }) => {
         <Text>Search Category</Text>
         <Accordion allowToggle>
           <AccordionItem>
-            <AccordionButton>Categories</AccordionButton>
+            <AccordionButton
+              bg={"blue.200"}
+              _focus={{ bg: "blue.100" }}
+              _expanded={{ bg: "blue.300" }}
+            >
+              Categories
+            </AccordionButton>
             <AccordionPanel>
               <Stack direction={"column"}>
                 <CheckboxGroup>

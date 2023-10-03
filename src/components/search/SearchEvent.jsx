@@ -25,6 +25,7 @@ export const SearchEvent = () => {
           id="SearchEventTitle"
           type="text"
           onChange={handleSearch}
+          bg={"blue.200"}
         ></Input>
       </Stack>
       <SearchFilterCategories events={matchedEvents} />
