@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardFooter,
   Image,
-  Tag,
   Text,
   Flex,
   Stack,
@@ -30,7 +29,7 @@ export const EventCardsList = ({ events, categories }) => {
             <Image src={event.image} w={"100%"} h={175} />
             <CardBody align={"center"}>
               <Stack>
-                <CardHeader>{event.title}</CardHeader>
+                <CardHeader fontSize={"1.4em"}>{event.title}</CardHeader>
                 <Text>{event.description}</Text>
                 <Flex gap={"1em"} justify={"center"}>
                   <ShowCategoriesLabels
@@ -41,11 +40,15 @@ export const EventCardsList = ({ events, categories }) => {
               </Stack>
             </CardBody>
             <CardFooter justify={"center"}>
-              <Stack align="center" direction="column">
-                <Text>Start: </Text>
-                <ShowDateAndTime date={event.startTime} />
-                <Text>End:</Text>
-                <ShowDateAndTime date={event.endTime} />
+              <Stack direction="column">
+                <Box align="center">
+                  <Text>Start: </Text>
+                  <ShowDateAndTime date={event.startTime} />
+                </Box>
+                <Box align="center">
+                  <Text>End:</Text>
+                  <ShowDateAndTime date={event.endTime} />
+                </Box>
               </Stack>
             </CardFooter>
           </Card>
