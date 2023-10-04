@@ -29,7 +29,6 @@ export const EventForm = ({ textButton, event, method }) => {
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  // console.log(selectedCategories);
   const changeSelectedCategories = (isChecked, categoryId) => {
     if (isChecked) {
       setSelectedCategories([...selectedCategories, categoryId]);
@@ -42,19 +41,19 @@ export const EventForm = ({ textButton, event, method }) => {
 
   useEffect(() => {
     if (selectedCategories.length === 0) {
-      setCheckSelectCategories(false);
-    } else {
       setCheckSelectCategories(true);
+    } else {
+      setCheckSelectCategories(false);
     }
   });
 
   const toast = useToast();
-  const [checkSelectCategories, setCheckSelectCategories] = useState(false);
+  const [checkSelectCategories, setCheckSelectCategories] = useState(true);
 
   const handleSubmit = (e) => {
-    if (checkSelectCategories) {
-      const data = new FormData(e.target);
-      const formObject = Object.fromEntries(data.entries());
+    const data = new FormData(e.target);
+    const formObject = Object.fromEntries(data.entries());
+    if (formObject.categoryIds.length > 0) {
       SendRequest({ method }, formObject);
       toast({
         title: `Event succesfully edited`,
@@ -114,12 +113,8 @@ export const EventForm = ({ textButton, event, method }) => {
               </Box>
               <Box>
                 <Stack direction={"row"}>
-                  {checkSelectCategories ? (
-                    <></>
-                  ) : (
-                    <>
-                      <Text color={"red"}>requires at least 1 category!!!</Text>
-                    </>
+                  {checkSelectCategories && (
+                    <Text color={"red"}>requires at least 1 category!!!</Text>
                   )}
                   {selectedCategories && (
                     <>

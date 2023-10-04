@@ -27,9 +27,7 @@ export const action = async ({ request }) => {
   transformFormData.createdBy = Number(formData.createdBy);
   const getCategoryIds = formData.categoryIds.split(",");
   transformFormData.categoryIds = returnNumberArray(getCategoryIds);
-  console.log(transformFormData.categoryIds.length);
   if (transformFormData.categoryIds.length <= 1) {
-    //this means there is no category selected
     return redirect(`/`);
   }
   const newId = await fetch("http://localhost:3000/events", {
@@ -51,7 +49,7 @@ const returnNumberArray = (array) => {
 };
 
 export const AddEventForm = ({ users, categories }) => {
-  const [checkSelectCategories, setCheckSelectCategories] = useState(false);
+  const [checkSelectCategories, setCheckSelectCategories] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -67,9 +65,9 @@ export const AddEventForm = ({ users, categories }) => {
 
   useEffect(() => {
     if (selectedCategories.length === 0) {
-      setCheckSelectCategories(false);
-    } else {
       setCheckSelectCategories(true);
+    } else {
+      setCheckSelectCategories(false);
     }
   });
 
@@ -106,12 +104,8 @@ export const AddEventForm = ({ users, categories }) => {
                   isReadOnly={true}
                 ></Input>
                 <Stack direction={"row"}>
-                  {checkSelectCategories ? (
-                    <></>
-                  ) : (
-                    <>
-                      <Text color={"red"}>requires at least 1 category!!!</Text>
-                    </>
+                  {checkSelectCategories && (
+                    <Text color={"red"}>requires at least 1 category!!!</Text>
                   )}
                   {selectedCategories && (
                     <>

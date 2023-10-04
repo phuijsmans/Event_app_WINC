@@ -32,7 +32,8 @@
       "description": "Let's play laser tag!",
       "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
       "categoryIds": [
-        2
+        2,
+        1
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
       "startTime": "2023-04-06T18:46",
