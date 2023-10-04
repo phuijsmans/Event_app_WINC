@@ -138,6 +138,7 @@ export const EventForm = ({ textButton, event, method }) => {
                             return (
                               <Checkbox
                                 key={category.id}
+                                id={category.name}
                                 onChange={(e) =>
                                   changeSelectedCategories(
                                     e.target.checked,

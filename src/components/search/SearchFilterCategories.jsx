@@ -16,7 +16,7 @@ export const SearchFilterCategories = ({ events }) => {
   const categories = useContext(CategoryContext);
   const [filterCategory, setFilterCategory] = useState([]);
 
-  const validateOneCategory = (object, filterCategory) => {
+  const hasOneCategory = (object, filterCategory) => {
     for (const category of object.categoryIds) {
       if (category === filterCategory[0]) {
         return true;
@@ -25,7 +25,7 @@ export const SearchFilterCategories = ({ events }) => {
     return false;
   };
 
-  const validateMultipleCategories = (object, filterCategories) => {
+  const hasMultipleCategories = (object, filterCategories) => {
     let amountCorrect = 0;
     for (const category of object.categoryIds) {
       for (const filterCategory of filterCategories) {
@@ -43,12 +43,12 @@ export const SearchFilterCategories = ({ events }) => {
       return object;
     }
     if (filterCategory.length === 1) {
-      if (validateOneCategory(object, filterCategory)) {
+      if (hasOneCategory(object, filterCategory)) {
         return object;
       }
     }
     if (filterCategory.length > 1) {
-      if (validateMultipleCategories(object, filterCategory)) {
+      if (hasMultipleCategories(object, filterCategory)) {
         return object;
       }
     }
@@ -81,6 +81,7 @@ export const SearchFilterCategories = ({ events }) => {
                   {categories.map((category) => (
                     <Checkbox
                       key={category.id}
+                      id={category.name}
                       onChange={(e) =>
                         handleCheckbox(e.target.checked, category.id)
                       }

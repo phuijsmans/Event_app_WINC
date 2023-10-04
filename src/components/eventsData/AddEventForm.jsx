@@ -129,6 +129,7 @@ export const AddEventForm = ({ users, categories }) => {
                             return (
                               <Checkbox
                                 key={category.id}
+                                id={category.name}
                                 onChange={(e) =>
                                   changeSelectedCategories(
                                     e.target.checked,

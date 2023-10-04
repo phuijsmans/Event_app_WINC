@@ -32,8 +32,7 @@
       "description": "Let's play laser tag!",
       "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
       "categoryIds": [
-        2,
-        1
+        2
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
       "startTime": "2023-04-06T18:46",
@@ -67,11 +66,10 @@
       "endTime": "2023-10-07T16:42"
     },
     {
-      "title": "asdasdaasdsdf",
+      "title": "qwerty1",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "description": "asdasda",
       "categoryIds": [
-        2,
         1
       ],
       "location": "asdsadad",
@@ -81,12 +79,12 @@
       "id": 5
     },
     {
-      "title": "asdsadolxzcsd",
+      "title": "qwerty2",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "description": "asdasdasdad",
       "categoryIds": [
-        2,
-        3
+        1,
+        2
       ],
       "location": "asdasd",
       "startTime": "2023-10-12T12:40",
@@ -95,7 +93,7 @@
       "id": 7
     },
     {
-      "title": "hjklbnm",
+      "title": "qwerty3",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "description": "asdswqweqwe",
       "categoryIds": [
