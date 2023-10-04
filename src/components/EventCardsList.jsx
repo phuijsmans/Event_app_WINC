@@ -26,8 +26,8 @@ export const EventCardsList = ({ events, categories }) => {
     >
       {events.map((event) => (
         <Link key={event.id} to={`/event/${event.id}`}>
-          <Card key={event.id} w={300} bg={"blue.300"}>
-            <Image src={event.image} w={"100%"} h={125} />
+          <Card key={event.id} w={300} bg={"blue.300"} overflow={"hidden"}>
+            <Image src={event.image} w={"100%"} h={175} />
             <CardBody align={"center"}>
               <Stack>
                 <CardHeader>{event.title}</CardHeader>
