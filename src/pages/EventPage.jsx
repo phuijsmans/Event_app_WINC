@@ -1,23 +1,7 @@
 import React from "react";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Heading,
-  Image,
-  Text,
-  Flex,
-  Stack,
-  Box,
-} from "@chakra-ui/react";
 
 import { useLoaderData } from "react-router-dom";
-import { DeleteEvent } from "../components/eventsData/DeleteEvent";
-import { EditEvent } from "../components/eventsData/EditEvent";
-import { CategoryContext, UsersContext } from "../components/Contexts";
-import { ShowCategoriesLabels } from "../components/showData/ShowCategoriesLabels";
-import { ShowDateAndTime } from "../components/showData/ShowDateAndTime";
+
 import { EventDetails } from "../components/EventDetails";
 
 export const loader = async ({ params }) => {
