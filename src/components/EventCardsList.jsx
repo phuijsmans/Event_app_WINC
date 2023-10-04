@@ -22,7 +22,7 @@ export const EventCardsList = ({ events, categories }) => {
       flexDir={"row"}
       justify="center"
       alignItems="center"
-      p={"2em"}
+      p={{ base: "0em", sm: "2em" }}
     >
       {events.map((event) => (
         <Link key={event.id} to={`/event/${event.id}`}>
