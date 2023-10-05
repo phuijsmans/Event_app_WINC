@@ -3,7 +3,6 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { EventDetails } from "../components/EventDetails";
-import { Box } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -20,9 +19,7 @@ export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   return (
     <>
-      <Box h="100%">
-        <EventDetails event={event} categories={categories} users={users} />
-      </Box>
+      <EventDetails event={event} categories={categories} users={users} />
     </>
   );
 };
