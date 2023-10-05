@@ -24,7 +24,7 @@ import { FormButton } from "../FormButton";
 import { CategoryContext, UsersContext } from "../../Contexts";
 import { SendRequest } from "../../RequestData/SendRequest";
 
-export const EventForm = ({ textButton, event, method }) => {
+export const EventForm = ({ textButton, event, method, clickFn }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
@@ -54,15 +54,16 @@ export const EventForm = ({ textButton, event, method }) => {
     const data = new FormData(e.target);
     const formObject = Object.fromEntries(data.entries());
     if (formObject.categoryIds.length > 0) {
-      SendRequest({ method }, formObject);
+      SendRequest({ method }, formObject, `events/${formObject.id}`);
       toast({
         title: `Event succesfully edited`,
-        description: `Event ${e.target.title.value} has succesfully been edited`,
+        description: `Event has succesfully been edited`,
         status: "success",
         duration: 2000,
         isClosable: true,
       });
       setSelectedCategories([]);
+      clickFn();
     } else {
       toast({
         title: `Event failed to edit`,

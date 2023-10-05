@@ -3,21 +3,30 @@ export const SendRequest = (method, formData) => {
   const sendRequest = async (method, root_url, url_part = "", body = false) => {
     const options = {};
     options.method = method;
-    if ((method !== "GET" && body) || method !== "DELETE") {
+    if (method === "GET") {
+      // console.log("GET REQUEST");
+    }
+    if (method === "DELETE") {
+      // console.log("DELETE REQUEST");
+    }
+    if (method === "PUT" || method === "PATCH") {
+      // console.log("Method is PUT or PATCH ", { method });
+
       options.body = JSON.stringify(body);
       options.headers = {
         "Content-Type": "application/json",
       };
-    }
-    if (method === "DELETE") {
-      console.log("DELETE REQUEST");
-    }
-    const newId = await fetch(`${root_url}${url_part}`, options)
-      .then((res) => res.json())
-      .then((json) => json.id);
+      const editedEvent = await fetch(`${root_url}${url_part}`, options).then(
+        (res) => res.json()
+      );
+      // .then((json) => json.id);
 
+      return;
+    }
+    // const newId = await fetch(`${root_url}${url_part}`, options)
+    //   .then((res) => res.json())
+    //   .then((json) => json.id);
     // return await response.json();
-
     // return redirect(`event/${newId}`);
   };
 
@@ -29,9 +38,7 @@ export const SendRequest = (method, formData) => {
     return forcedNumbersArray;
   };
 
-  const test = (method, formData) => {
-    console.log("SendRequest.jsx");
-    console.log(method, formData);
+  const massageFormData = (method, formData) => {
     let massageFormData = JSON.parse(JSON.stringify(formData));
     massageFormData.createdBy = Number(formData.createdBy);
     const getCategoryIds = formData.categoryIds.split(",");
@@ -45,5 +52,12 @@ export const SendRequest = (method, formData) => {
     );
   };
 
-  test(method.method, formData);
+  if (method.method === "GET") {
+    console.log(method.method);
+    sendRequest(method.method, ROOT_URL, `events/${formData.id}`);
+  }
+
+  if (method.method === "PUT" || method.method === "PATCH") {
+    massageFormData(method.method, formData);
+  }
 };
