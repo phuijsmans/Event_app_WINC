@@ -4,19 +4,16 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Heading,
   Image,
   Text,
   Flex,
   Stack,
-  Box,
 } from "@chakra-ui/react";
 import { ShowCategoriesLabels } from "../components/showData/ShowCategoriesLabels";
 import { ShowDateAndTime } from "../components/showData/ShowDateAndTime";
 import { CategoryContext, UsersContext } from "../components/Contexts";
 import { DeleteEvent } from "../components/eventsData/DeleteEvent";
 import { EditEvent } from "../components/eventsData/EditEvent";
-import { SendRequest } from "./RequestData/SendRequest";
 
 export const EventDetails = ({ event, categories, users }) => {
   const [eventDetails, setEventDetails] = useState(event);

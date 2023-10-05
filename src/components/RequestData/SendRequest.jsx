@@ -3,31 +3,29 @@ export const SendRequest = (method, formData) => {
   const sendRequest = async (method, root_url, url_part = "", body = false) => {
     const options = {};
     options.method = method;
-    if (method === "GET") {
-      // console.log("GET REQUEST");
-    }
-    if (method === "DELETE") {
-      // console.log("DELETE REQUEST");
-    }
-    if (method === "PUT" || method === "PATCH") {
-      // console.log("Method is PUT or PATCH ", { method });
+    switch (method) {
+      case "GET":
+        // console.log("GET REQUEST");
+        break;
+      case "PUT":
+      case "PATCH":
+        // console.log("Method is PUT or PATCH ", { method });
 
-      options.body = JSON.stringify(body);
-      options.headers = {
-        "Content-Type": "application/json",
-      };
-      const editedEvent = await fetch(`${root_url}${url_part}`, options).then(
-        (res) => res.json()
-      );
-      // .then((json) => json.id);
-
-      return;
+        options.body = JSON.stringify(body);
+        options.headers = {
+          "Content-Type": "application/json",
+        };
+        await fetch(`${root_url}${url_part}`, options).then((res) =>
+          res.json()
+        );
+        break;
+      case "DELETE":
+        // console.log("DELETE REQUEST");
+        break;
+      case "POST":
+        // console.log("POST REQUEST");
+        break;
     }
-    // const newId = await fetch(`${root_url}${url_part}`, options)
-    //   .then((res) => res.json())
-    //   .then((json) => json.id);
-    // return await response.json();
-    // return redirect(`event/${newId}`);
   };
 
   const returnNumbersArray = (array) => {
