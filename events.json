@@ -68,11 +68,11 @@
     {
       "title": "qwerty1",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "description": "asdasda",
+      "description": "Example event qwerty1",
       "categoryIds": [
         1
       ],
-      "location": "asdsadad",
+      "location": "qwerty",
       "startTime": "2023-10-16T17:29",
       "endTime": "2023-10-26T17:29",
       "createdBy": 1,
@@ -81,12 +81,12 @@
     {
       "title": "qwerty2",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "description": "asdasdasdad",
+      "description": "Example event qwerty2",
       "categoryIds": [
         1,
         2
       ],
-      "location": "asdasd",
+      "location": "QWERTY",
       "startTime": "2023-10-12T12:40",
       "endTime": "2023-10-26T12:40",
       "createdBy": 1,
@@ -95,15 +95,15 @@
     {
       "title": "qwerty3",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "description": "adwdeqe",
+      "description": "Example event qwerty3",
       "categoryIds": [
         1,
         2,
         3
       ],
-      "location": "asdsad",
-      "startTime": "2023-10-13T16:19",
-      "endTime": "2023-10-20T16:19",
+      "location": "QWERTY",
+      "startTime": "2023-10-13T14:44",
+      "endTime": "2023-10-18T14:44",
       "createdBy": 2,
       "id": 8
     }

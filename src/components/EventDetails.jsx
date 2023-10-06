@@ -8,6 +8,8 @@ import {
   Text,
   Flex,
   Stack,
+  Button,
+  useToast,
 } from "@chakra-ui/react";
 import { ShowCategoriesLabels } from "../components/showData/ShowCategoriesLabels";
 import { ShowDateAndTime } from "../components/showData/ShowDateAndTime";
@@ -15,17 +17,18 @@ import { CategoryContext, UsersContext } from "../components/Contexts";
 import { DeleteEvent } from "../components/eventsData/DeleteEvent";
 import { EditEvent } from "../components/eventsData/EditEvent";
 
-export const EventDetails = ({ event, categories, users }) => {
+export const EventDetails = ({ event, categories, users, submitted }) => {
   const [eventDetails, setEventDetails] = useState(event);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/events/${event.id}`);
-      const json = await response.json();
-      setEventDetails(json);
-      // console.log(json);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   console.log("useEffect fetchData triggered");
+  //   const fetchData = async () => {
+  //     const response = await fetch(`http://localhost:3000/events/${event.id}`);
+  //     const json = await response.json();
+  //     setEventDetails(json);
+  //     // console.log(json);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const fetchData = async () => {
     const response = await fetch(`http://localhost:3000/events/${event.id}`);
@@ -33,6 +36,23 @@ export const EventDetails = ({ event, categories, users }) => {
     setEventDetails(json);
     // console.log(eventDetails);
   };
+
+  const toast = useToast();
+  const refreshEvent = () => {
+    fetchData();
+    toast({
+      title: `Event refreshed!`,
+
+      status: "success",
+      duration: 1000,
+      isClosable: true,
+    });
+  };
+
+  // submitted = () => {
+  //   console.log("Update event!");
+  //   fetchData();
+  // };
 
   return (
     <>
@@ -68,10 +88,11 @@ export const EventDetails = ({ event, categories, users }) => {
             <Stack gap="1em" direction={{ base: "column", sm: "row" }}>
               <CategoryContext.Provider value={categories}>
                 <UsersContext.Provider value={users}>
-                  <EditEvent event={event} clickFn={fetchData} />
+                  <EditEvent event={eventDetails} submitted={submitted} />
                 </UsersContext.Provider>
               </CategoryContext.Provider>
-              <DeleteEvent event={event} />
+              <Button onClick={refreshEvent}>REFRESH EVENT</Button>
+              <DeleteEvent event={eventDetails} />
             </Stack>
           </CardFooter>
         </Card>

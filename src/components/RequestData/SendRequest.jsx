@@ -10,8 +10,7 @@ export const SendRequest = (method, formData) => {
       case "PUT":
       case "PATCH":
         // console.log("Method is PUT or PATCH ", { method });
-
-        options.body = JSON.stringify(body);
+        options.body = JSON.stringify(massageFormData(body));
         options.headers = {
           "Content-Type": "application/json",
         };
@@ -26,6 +25,7 @@ export const SendRequest = (method, formData) => {
         // console.log("POST REQUEST");
         break;
     }
+    return;
   };
 
   const returnNumbersArray = (array) => {
@@ -36,26 +36,36 @@ export const SendRequest = (method, formData) => {
     return forcedNumbersArray;
   };
 
-  const massageFormData = (method, formData) => {
+  const massageFormData = (formData) => {
     let massageFormData = JSON.parse(JSON.stringify(formData));
     massageFormData.createdBy = Number(formData.createdBy);
     const getCategoryIds = formData.categoryIds.split(",");
     massageFormData.categoryIds = returnNumbersArray(getCategoryIds);
     massageFormData.id = Number(formData.id);
-    sendRequest(
-      method,
-      ROOT_URL,
-      `events/${massageFormData.id}`,
-      massageFormData
-    );
+    return massageFormData;
   };
+  sendRequest(method.method, ROOT_URL, `events/${formData.id}`, formData);
 
-  if (method.method === "GET") {
-    console.log(method.method);
-    sendRequest(method.method, ROOT_URL, `events/${formData.id}`);
-  }
+  // const massageFormDatatest = (method, formData) => {
+  //   let massageFormData = JSON.parse(JSON.stringify(formData));
+  //   massageFormData.createdBy = Number(formData.createdBy);
+  //   const getCategoryIds = formData.categoryIds.split(",");
+  //   massageFormData.categoryIds = returnNumbersArray(getCategoryIds);
+  //   massageFormData.id = Number(formData.id);
+  //   sendRequest(
+  //     method,
+  //     ROOT_URL,
+  //     `events/${massageFormData.id}`,
+  //     massageFormData
+  //   );
+  // };
 
-  if (method.method === "PUT" || method.method === "PATCH") {
-    massageFormData(method.method, formData);
-  }
+  // if (method.method === "GET") {
+  //   console.log(method.method);
+  //   sendRequest(method.method, ROOT_URL, `events/${formData.id}`);
+  // }
+
+  // if (method.method === "PUT" || method.method === "PATCH") {
+  //   massageFormDatatest(method.method, formData);
+  // }
 };

@@ -24,7 +24,7 @@ import { FormButton } from "../FormButton";
 import { CategoryContext, UsersContext } from "../../Contexts";
 import { SendRequest } from "../../RequestData/SendRequest";
 
-export const EventForm = ({ textButton, event, method, clickFn }) => {
+export const EventForm = ({ textButton, event, method, submitted }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
@@ -50,20 +50,21 @@ export const EventForm = ({ textButton, event, method, clickFn }) => {
   const toast = useToast();
   const [checkSelectCategories, setCheckSelectCategories] = useState(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const data = new FormData(e.target);
     const formObject = Object.fromEntries(data.entries());
     if (formObject.categoryIds.length > 0) {
       SendRequest({ method }, formObject, `events/${formObject.id}`);
       toast({
         title: `Event succesfully edited`,
-        description: `Event has succesfully been edited`,
+        description: `Event has succesfully been edited, please refresh with the refresh button.`,
         status: "success",
         duration: 2000,
         isClosable: true,
       });
+      onClose();
       setSelectedCategories([]);
-      clickFn();
+      await submitted();
     } else {
       toast({
         title: `Event failed to edit`,
