@@ -76,10 +76,15 @@ export const EventForm = ({ textButton, event, method, submitted }) => {
     }
   };
 
+  const resetForm = () => {
+    onClose();
+    setSelectedCategories([]);
+  };
+
   return (
     <>
       <FormButton textButton={textButton} clickFn={onOpen} />
-      <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
+      <Modal isOpen={isOpen} onClose={resetForm} size={"3xl"}>
         <ModalOverlay />
         <ModalContent p={"2em"}>
           <Form
