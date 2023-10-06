@@ -24,7 +24,7 @@ import { FormButton } from "../FormButton";
 import { CategoryContext, UsersContext } from "../../Contexts";
 import { SendRequest } from "../../RequestData/SendRequest";
 
-export const EventForm = ({ textButton, event, method, submitted }) => {
+export const EventForm = ({ textButton, event, method }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const categories = useContext(CategoryContext);
   const users = useContext(UsersContext);
@@ -64,7 +64,6 @@ export const EventForm = ({ textButton, event, method, submitted }) => {
       });
       onClose();
       setSelectedCategories([]);
-      await submitted();
     } else {
       toast({
         title: `Event failed to edit`,

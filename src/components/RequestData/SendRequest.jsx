@@ -5,11 +5,9 @@ export const SendRequest = (method, formData) => {
     options.method = method;
     switch (method) {
       case "GET":
-        // console.log("GET REQUEST");
         break;
       case "PUT":
       case "PATCH":
-        // console.log("Method is PUT or PATCH ", { method });
         options.body = JSON.stringify(massageFormData(body));
         options.headers = {
           "Content-Type": "application/json",
@@ -19,10 +17,8 @@ export const SendRequest = (method, formData) => {
         );
         break;
       case "DELETE":
-        // console.log("DELETE REQUEST");
         break;
       case "POST":
-        // console.log("POST REQUEST");
         break;
     }
     return;
@@ -45,27 +41,4 @@ export const SendRequest = (method, formData) => {
     return massageFormData;
   };
   sendRequest(method.method, ROOT_URL, `events/${formData.id}`, formData);
-
-  // const massageFormDatatest = (method, formData) => {
-  //   let massageFormData = JSON.parse(JSON.stringify(formData));
-  //   massageFormData.createdBy = Number(formData.createdBy);
-  //   const getCategoryIds = formData.categoryIds.split(",");
-  //   massageFormData.categoryIds = returnNumbersArray(getCategoryIds);
-  //   massageFormData.id = Number(formData.id);
-  //   sendRequest(
-  //     method,
-  //     ROOT_URL,
-  //     `events/${massageFormData.id}`,
-  //     massageFormData
-  //   );
-  // };
-
-  // if (method.method === "GET") {
-  //   console.log(method.method);
-  //   sendRequest(method.method, ROOT_URL, `events/${formData.id}`);
-  // }
-
-  // if (method.method === "PUT" || method.method === "PATCH") {
-  //   massageFormDatatest(method.method, formData);
-  // }
 };

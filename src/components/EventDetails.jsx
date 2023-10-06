@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardBody,
@@ -17,24 +17,13 @@ import { CategoryContext, UsersContext } from "../components/Contexts";
 import { DeleteEvent } from "../components/eventsData/DeleteEvent";
 import { EditEvent } from "../components/eventsData/EditEvent";
 
-export const EventDetails = ({ event, categories, users, submitted }) => {
+export const EventDetails = ({ event, categories, users }) => {
   const [eventDetails, setEventDetails] = useState(event);
-  // useEffect(() => {
-  //   console.log("useEffect fetchData triggered");
-  //   const fetchData = async () => {
-  //     const response = await fetch(`http://localhost:3000/events/${event.id}`);
-  //     const json = await response.json();
-  //     setEventDetails(json);
-  //     // console.log(json);
-  //   };
-  //   fetchData();
-  // }, []);
 
   const fetchData = async () => {
     const response = await fetch(`http://localhost:3000/events/${event.id}`);
     const json = await response.json();
     setEventDetails(json);
-    // console.log(eventDetails);
   };
 
   const toast = useToast();
@@ -48,11 +37,6 @@ export const EventDetails = ({ event, categories, users, submitted }) => {
       isClosable: true,
     });
   };
-
-  // submitted = () => {
-  //   console.log("Update event!");
-  //   fetchData();
-  // };
 
   return (
     <>
@@ -88,7 +72,7 @@ export const EventDetails = ({ event, categories, users, submitted }) => {
             <Stack gap="1em" direction={{ base: "column", sm: "row" }}>
               <CategoryContext.Provider value={categories}>
                 <UsersContext.Provider value={users}>
-                  <EditEvent event={eventDetails} submitted={submitted} />
+                  <EditEvent event={eventDetails} />
                 </UsersContext.Provider>
               </CategoryContext.Provider>
               <Button onClick={refreshEvent}>REFRESH EVENT</Button>
